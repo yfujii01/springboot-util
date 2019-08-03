@@ -7,7 +7,7 @@ function setting(){ # settingファイルを独自のものに置き換える
     
     # application.properties
     curl -L -O https://raw.githubusercontent.com/yfujii01/springboot-util/master/application.properties
-    mv ./src/main/resources/application.properties
+    mv application.properties ./src/main/resources/application.properties
 
 }
 
