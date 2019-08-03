@@ -14,7 +14,7 @@ function setting(){ # settingファイルを独自のものに置き換える
 
     # flyway用マイグレーションSQL
     curl -L -O https://raw.githubusercontent.com/yfujii01/springboot-util/master/V1__Initail_DB.sql
-    mkdir ./src/main/resources/db/migration
+    mkdir -p ./src/main/resources/db/migration
     mv V1__Initail_DB.sql ./src/main/resources/db/migration/V1__Initail_DB.sql
 
 }
