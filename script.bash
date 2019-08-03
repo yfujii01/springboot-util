@@ -5,6 +5,9 @@ function setting(){ # settingファイルを独自のものに置き換える
     # スクリプトダウンロード
     curl -L -O https://raw.githubusercontent.com/yfujii01/springboot-util/master/script.bash
     
+    # .gitignore
+    curl -L -O https://raw.githubusercontent.com/yfujii01/springboot-util/master/.gitignore
+    
     # application.properties
     curl -L -O https://raw.githubusercontent.com/yfujii01/springboot-util/master/application.properties
     mv application.properties ./src/main/resources/application.properties
