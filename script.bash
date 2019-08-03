@@ -4,6 +4,11 @@ function help(){ # コマンド一覧を表示する
 function setting(){ # settingファイルを独自のものに置き換える
     # スクリプトダウンロード
     curl -L -O https://raw.githubusercontent.com/yfujii01/springboot-util/master/script.bash
+    
+    # application.properties
+    curl -L -O https://raw.githubusercontent.com/yfujii01/springboot-util/master/application.properties
+    mv ./src/main/resources/application.properties
+
 }
 
 # 引数に指定した関数を実行する
