@@ -9,6 +9,11 @@ function setting(){ # settingファイルを独自のものに置き換える
     curl -L -O https://raw.githubusercontent.com/yfujii01/springboot-util/master/application.properties
     mv application.properties ./src/main/resources/application.properties
 
+    # flyway用マイグレーションSQL
+    curl -L -O https://raw.githubusercontent.com/yfujii01/springboot-util/master/V1__Initail_DB.sql
+    mkdir ./src/main/resources/db/migration
+    mv V1__Initail_DB.sql ./src/main/resources/db/migration/V1__Initail_DB.sql
+
 }
 
 # 引数に指定した関数を実行する
