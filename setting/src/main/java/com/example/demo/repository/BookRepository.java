@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.example.demo.entity.Book;
+import com.example.demo.entity.Publisher;
 import com.example.demo.entity.Writing;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,9 @@ public class BookRepository {
 
   public List<Book> findAll() {
     SqlParameterSource paramSource = null;
-    List<Map<String, Object>> resList = jdbcTemplateName
-        .queryForList("select b.*,w.author_id from book b left outer join writing w on b.id = w.book_id", paramSource);
+    List<Map<String, Object>> resList = jdbcTemplateName.queryForList(
+        "select b.*,w.author_id,p.name p_name from book b left outer join writing w on b.id = w.book_id left outer join publisher p on b.pub_id = p.id",
+        paramSource);
     Map<Long, Book> bookMap = new TreeMap<>();
     resList.forEach(res -> {
       Long key = (Long) res.get("id");
@@ -49,6 +51,15 @@ public class BookRepository {
             });
           }
         });
+
+        if (value.getPubId() != null) {
+          value.setPublisher(new Publisher() {
+            {
+              setId((Long) res.get("pub_id"));
+              setName((String) res.get("p_name"));
+            }
+          });
+        }
 
       } else {
         // 関連データ追加
