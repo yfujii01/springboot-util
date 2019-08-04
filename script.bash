@@ -4,8 +4,7 @@ function help(){ # コマンド一覧を表示する
 function setting(){ # settingファイルを独自のものに置き換える
     curl -L -O https://github.com/yfujii01/springboot-util/archive/master.zip
     unzip -o master.zip
-    cp -r springboot-util-master/setting/* .
-    cp -r springboot-util-master/setting/.* .
+    cp -rT springboot-util-master/setting .
     rm master.zip
     rm -rf springboot-util-master
 }
