@@ -11,5 +11,6 @@ public class Book {
     private String publicationYear;
     private Long pubId;
     private Publisher publisher;
-    private List<Writing> writings;
+    // private List<Writing> writings;
+    private List<Author> authors;
 }
