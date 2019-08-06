@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.example.demo.entity.Book;
@@ -11,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,9 +56,10 @@ public class BookController {
     //     jdbcTemplateName.update("UPDATE HOGE SET name = :name WHERE id = :id", params);
     // }
 
-    // @DeleteMapping("{id}")
-    // public void delete(@PathVariable("id") int id) throws Exception {
-    //     SqlParameterSource params = new MapSqlParameterSource().addValue("id", id);
-    //     jdbcTemplateName.update("DELETE FROM HOGE WHERE id = :id", params);
-    // }
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable("id") Long id) throws Exception {
+        Book selectBook = new Book();
+        selectBook.setId(id);
+        bookRepository.delete(selectBook);
+    }
 }

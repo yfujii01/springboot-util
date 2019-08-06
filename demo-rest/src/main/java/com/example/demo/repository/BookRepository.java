@@ -170,4 +170,17 @@ public class BookRepository {
     // 登録したレコードのIDを返却
     return jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Long.class);
   }
+
+  public void delete(Book book) {
+    final SqlParameterSource params = new MapSqlParameterSource()
+        // ID
+        .addValue("id", book.getId());
+
+    final StringBuilder sql = new StringBuilder()
+        .append(" delete from book                                                  ")
+        .append(" where                                                             ")
+        .append("   id = :id                                                        ");
+
+    jdbcTemplateName.update(sql.toString(), params);
+  }
 }
