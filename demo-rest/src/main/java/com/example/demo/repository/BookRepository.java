@@ -100,7 +100,7 @@ public class BookRepository {
     // SQL発行
     List<Book> execute = execute(params, sql);
     if (execute.size() == 0) {
-      throw new NoDataException();
+      throw new NoDataException("Data Not Found!");
     }
     return execute.get(0);
   }
