@@ -35,13 +35,23 @@ GET http://localhost:8080/books/1
 POST http://localhost:8080/books
 Content-Type: application/json
 
-{"name":"foo"}
+{
+  "title":"foo",
+  "isbn":"1234567890",
+  "publicationYear":"2019",
+  "pubId":"1"
+}
 
 ### 更新
 PUT http://localhost:8080/books/1
 Content-Type: application/json
 
-{"name":"bar"}
+{
+  "title":"hoge",
+  "isbn":"1234567890",
+  "publicationYear":"2019",
+  "pubId":"1"
+}
 
 ### 削除
 DELETE http://localhost:8080/books/2
