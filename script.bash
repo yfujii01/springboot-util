@@ -1,6 +1,19 @@
 function help(){ # コマンド一覧を表示する
     cat ./script.bash | grep "^function [A-z]"
 }
+function demo-rest(){ # ファイルをdemo-restのものに置き換える
+    curl -L -O https://github.com/yfujii01/springboot-util/archive/master.zip
+    unzip -o master.zip
+
+    cp -a ./springboot-util-master/demo-rest/* .
+    cp -a ./springboot-util-master/demo-rest/src .
+    cp -a ./springboot-util-master/demo-rest/build.gradle .
+    cp -a ./springboot-util-master/demo-rest/requests.http .
+    cp -a ./springboot-util-master/demo-rest/.gitignore .
+
+    rm master.zip
+    rm -rf springboot-util-master
+}
 function setting(){ # settingファイルを独自のものに置き換える
     curl -L -O https://github.com/yfujii01/springboot-util/archive/master.zip
     unzip -o master.zip
