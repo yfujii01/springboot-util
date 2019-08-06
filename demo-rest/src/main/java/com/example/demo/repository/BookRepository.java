@@ -1,7 +1,5 @@
 package com.example.demo.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +10,7 @@ import com.example.demo.entity.Book;
 import com.example.demo.entity.Publisher;
 import com.example.demo.exception.NoDataException;
 
-import org.flywaydb.core.internal.jdbc.RowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
