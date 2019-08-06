@@ -1,0 +1,47 @@
+####################################################
+# HOGE
+####################################################
+### 全件取得
+GET http://localhost:8080/hoge
+
+### ID指定取得
+GET http://localhost:8080/hoge/1
+
+### 新規保存
+POST http://localhost:8080/hoge
+Content-Type: application/json
+
+{"name":"foo"}
+
+### 更新
+PUT http://localhost:8080/hoge/1
+Content-Type: application/json
+
+{"name":"bar"}
+
+### 削除
+DELETE http://localhost:8080/hoge/2
+
+####################################################
+# BOOK
+####################################################
+### 全件取得
+GET http://localhost:8080/books
+
+### ID指定取得
+GET http://localhost:8080/books/1
+
+### 新規保存
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{"name":"foo"}
+
+### 更新
+PUT http://localhost:8080/books/1
+Content-Type: application/json
+
+{"name":"bar"}
+
+### 削除
+DELETE http://localhost:8080/books/2
