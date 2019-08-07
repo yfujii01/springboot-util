@@ -29,7 +29,7 @@ create table author (
   primary key (id)
 );
 
-insert into author (first_name,last_name) values 
+insert into author (last_name,first_name) values 
 ('さとう','たける'),
 ('たなか','ごろう'),
 ('あべ','しんぞう'),
