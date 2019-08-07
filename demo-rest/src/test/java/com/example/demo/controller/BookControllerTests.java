@@ -6,6 +6,7 @@ import java.util.List;
 import com.example.demo.entity.Author;
 import com.example.demo.entity.Book;
 import com.example.demo.entity.Publisher;
+import com.example.demo.repository.BookRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -86,20 +88,61 @@ public class BookControllerTests {
     expected.setAuthors(new ArrayList<Author>() {
       private static final long serialVersionUID = 1L;
       {
-        add(new Author(){{
-          setId(new Long(1));
-          setLastName("さとう");
-          setFirstName("たける");
-        }});
-        add(new Author(){{
-          setId(new Long(2));
-          setLastName("たなか");
-          setFirstName("ごろう");
-        }});
+        add(new Author() {
+          {
+            setId(new Long(1));
+            setLastName("さとう");
+            setFirstName("たける");
+          }
+        });
+        add(new Author() {
+          {
+            setId(new Long(2));
+            setLastName("たなか");
+            setFirstName("ごろう");
+          }
+        });
       }
     });
 
     Assert.assertEquals(expected.toString(), book.toString());
+  }
+
+  @Autowired
+  BookRepository bookRepository;
+
+  @Test
+  public void insert() throws Exception {
+
+    // テスト実行前のbook
+    List<Book> beforeBooks = bookRepository.findAllNoRelation();
+
+
+    Book insertBook = new Book(){{
+      setTitle("title");
+      setIsbn("isbn");
+      setPublicationYear("2019");
+    }};
+
+    // public呼び出し
+    MvcResult result = mockMvc.perform((MockMvcRequestBuilders.post("/books"))
+        // ContentTypeの設定
+        .contentType(MediaType.APPLICATION_JSON)
+        // Jsonの設定
+        .content(new ObjectMapper().writeValueAsString(insertBook)))
+        // 返却されるhttp status code
+        .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+
+    // body内容の確認
+    String body = result.getResponse().getContentAsString();
+    ObjectMapper mapper = new ObjectMapper();
+    Long id = mapper.readValue(body, Long.class);
+
+    // テスト実行後のbook
+    List<Book> afterBooks = bookRepository.findAllNoRelation();
+
+    Assert.assertEquals(beforeBooks.size() + 1, afterBooks.size());
+    Assert.assertEquals(beforeBooks.size() + 1, id.intValue());
   }
 
 }
