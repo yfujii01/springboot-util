@@ -1,0 +1,18 @@
+###
+GET http://localhost:8080/public
+###
+GET http://localhost:8080/private
+###
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username":"hoge",
+  "password":"fuga"
+}
+###
+GET http://localhost:8080/private
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2dlIiwiZXhwIjoxNTY1MzMwNjg2fQ.l9VB8SQUDniQUuspeTTZHvFghrBx5c51KqSbDWDBkqbYJivUW97OG5J-irQrDz8iACGEah0prIN0j9wnJou1VQ
+###
+GET http://localhost:8080/private
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2dlIiwiZXhwIjoxNTY1Mjk0MTM1fQ.Wg_9-tdc6Ht43GGB-YS6MHVgbSuVA9pPjxqFx07esb21TXw9Jzj1iqWEZdIfDvR2aWqw3vMzy8F67JIqHGKcog
