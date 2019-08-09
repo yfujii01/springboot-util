@@ -32,8 +32,8 @@ POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "username": "hoge",
-  "password": "fuga",
+  "username": "fuga",
+  "password": "password",
   "enabled": "true",
   "authorities": [
     { "authority": "ADMIN" },

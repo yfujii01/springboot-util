@@ -2,15 +2,23 @@
 -- https://docs.spring.io/spring-security/site/docs/3.0.x/reference/appendix-schema.html
 
 create table users(
-  username varchar_ignorecase(50) not null primary key,
-  password varchar_ignorecase(50) not null,
+  username varchar_ignorecase(255) not null primary key,
+  password varchar_ignorecase(255) not null,
   enabled boolean not null
 );
 
 create table authorities (
-  username varchar_ignorecase(50) not null,
-  authority varchar_ignorecase(50) not null,
-  constraint fk_authorities_users foreign key(username) references users(username)
+  username varchar_ignorecase(255) not null,
+  authority varchar_ignorecase(255) not null,
+  constraint fk_authorities_users foreign key(username) references users(username) on delete cascade
 );
 
 create unique index ix_auth_username on authorities (username,authority);
+
+insert into users set 
+  username = 'root',
+  password = '$2a$10$UZvhb9hCAKHUuYVW7qBbV.phVLA8LONl3AZLo7eeReWduopd.Zrx2',
+  enabled = true;
+
+insert into authorities (username,authority) values
+('root','ADMIN');

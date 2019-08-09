@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping
     public List<User> findAll() throws JsonProcessingException {
         return userRepository.findAll();
@@ -37,7 +41,8 @@ public class UserController {
 
     @PostMapping()
     public void insert(@Validated @RequestBody User user) throws Exception {
-        userRepository.insert(user);
+        // userRepository.insert(user);
+        userService.insert(user);
     }
 
     @PutMapping("{username}")
