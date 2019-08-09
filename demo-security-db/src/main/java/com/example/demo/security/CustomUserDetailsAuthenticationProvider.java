@@ -1,29 +1,25 @@
 package com.example.demo.security;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import com.example.demo.entity.User;
+import com.example.demo.exception.NoDataException;
+import com.example.demo.service.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /** 認証 */
 public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-  /** ダミー実装:認証を通すためのユーザーとパスワードの組み合わせ */
-  Map<String, String> userPasswordMap = new HashMap<String, String>() {
-    private static final long serialVersionUID = 1L;
-    {
-      put("hoge", "fuga");
-      put("user", "password");
-    }
-  };
+  @Autowired
+  UserService userService;
 
   /** 認証：ユーザー名とパスワードのチェック */
   @Override
@@ -34,18 +30,28 @@ public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetails
     // パスワードの取得
     String password = (String) authentication.getCredentials();
 
-    // =======================================================
-    // ダミー実装:本来はここでDBなどから値をとってきてチェックする
-    // =======================================================
+    // ユーザー情報取得
+    User user;
+    try {
+      user = userService.findByUsername(new User(username));
+    } catch (NoDataException e) {
+      // ユーザー情報を取得できなければ例外をスロー
+      e.printStackTrace();
+      throw new UsernameNotFoundException(username);
+    }
+
     // ユーザIDとパスワードをチェック
     boolean isValid = false;
-    if (password.equals(userPasswordMap.get(username)))
+
+    // パスワードが一致するか
+    if (userService.passwordCheck(password, user.getPassword()))
       isValid = true;
     if (!isValid) {
+      // パスワードが一致しなければ例外をスロー
       throw new UsernameNotFoundException(username);
     }
     // 有効であるか
-    boolean enabled = true;
+    boolean enabled = user.getEnabled();
     // アカウント有効期限が切れていないか
     boolean accountNonExpired = true;
     // 資格情報有効期限が切れていないか
@@ -53,12 +59,16 @@ public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetails
     // アカウントがロックされていないか
     boolean accountNonLocked = true;
     // 権限
-    List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("USER");
+    String[] authorities2 = new String[user.getAuthorities().size()];
+    for (int i = 0; i < user.getAuthorities().size(); i++) {
+      authorities2[i] = user.getAuthorities().get(i).getAuthority();
+    }
+    List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(authorities2);
 
     // ユーザーオブジェクトを返却
     // この後、enable,accountNonExpired,credentialsNonExpired,accountNonLockedの検証を行う
-    return new User(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked,
-        authorities);
+    return new org.springframework.security.core.userdetails.User(username, password, enabled, accountNonExpired,
+        credentialsNonExpired, accountNonLocked, authorities);
   }
 
   /** 追加の認証チェック:retrieveUser成功後に呼ばれる */

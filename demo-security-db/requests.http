@@ -10,6 +10,22 @@ Content-Type: application/json
   "username":"hoge",
   "password":"fuga"
 }
+### ADMIN token発行
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username":"root",
+  "password":"password"
+}
+### USER token発行
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username":"user",
+  "password":"password"
+}
 ###
 GET http://localhost:8080/private
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2dlIiwiZXhwIjoxNTY1MzMwNjg2fQ.l9VB8SQUDniQUuspeTTZHvFghrBx5c51KqSbDWDBkqbYJivUW97OG5J-irQrDz8iACGEah0prIN0j9wnJou1VQ
@@ -23,6 +39,11 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2dlIiwiZXhwIjoxNTY1Mjk0M
 ####################################################
 ### 全件取得
 GET http://localhost:8080/users
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb290IiwiZXhwIjoxNTY1Mzk0OTk5LCJhdXRob3JpdGllcyI6WyJST0xFX0FETUlOIl19.epZIu8xVLB2oS4aE7grwwmng40yNW8GIjxf9S8AJG5thV5PNgtOb3N02nAnfozGHNbiRgV9muyEsUfWNedmQgA
+
+### 全件取得
+GET http://localhost:8080/users
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTY1Mzk1MjkxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXX0.AGB74XxfvTu--jjyQMFObpU3U1OOjbJeNoWFOwOojCHrsB8pjbdPqCHEcQz5fKgZNhwaVbzkSCE6E1U_fJopqA
 
 ### ID指定取得
 GET http://localhost:8080/users/hoge

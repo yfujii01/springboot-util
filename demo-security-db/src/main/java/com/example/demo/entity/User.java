@@ -5,8 +5,10 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class User {
     /** ユーザー名 */
     @NotNull
@@ -23,4 +25,7 @@ public class User {
     /** (関連)権限 */
     private List<Authority> authorities;
 
+    public User(String username) {
+        this.username = username;
+    }
 }

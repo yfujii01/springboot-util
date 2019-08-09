@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.User;
+import com.example.demo.exception.NoDataException;
 import com.example.demo.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class UserService {
 
   /** パスワードエンコーダー */
   @Autowired PasswordEncoder passwordEncoder;
+
+  public User findByUsername(User user) throws NoDataException{
+    return userRepository.findById(user);
+  }
 
   public void insert(User user) {
     user.setPassword(passwordEncoder.encode(user.getPassword()));
