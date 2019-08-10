@@ -1,6 +1,7 @@
 package com.example.demo.security;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.example.demo.entity.User;
 import com.example.demo.exception.NoDataException;
@@ -59,11 +60,9 @@ public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetails
     // アカウントがロックされていないか
     boolean accountNonLocked = true;
     // 権限
-    String[] authorities2 = new String[user.getAuthorities().size()];
-    for (int i = 0; i < user.getAuthorities().size(); i++) {
-      authorities2[i] = user.getAuthorities().get(i).getAuthority();
-    }
-    List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(authorities2);
+    String[] auth = user.getAuthorities().stream().map(a -> a.getAuthority()).collect(Collectors.toList())
+        .toArray(new String[0]);
+    List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(auth);
 
     // ユーザーオブジェクトを返却
     // この後、enable,accountNonExpired,credentialsNonExpired,accountNonLockedの検証を行う

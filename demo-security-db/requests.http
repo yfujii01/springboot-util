@@ -14,36 +14,42 @@ Content-Type: application/json
 POST http://localhost:8080/login
 Content-Type: application/json
 
-{
-  "username":"root",
-  "password":"password"
-}
+{ "username":"root", "password":"password" }
 ### USER token発行
 POST http://localhost:8080/login
 Content-Type: application/json
 
-{
-  "username":"user",
-  "password":"password"
-}
-###
-GET http://localhost:8080/private
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2dlIiwiZXhwIjoxNTY1MzMwNjg2fQ.l9VB8SQUDniQUuspeTTZHvFghrBx5c51KqSbDWDBkqbYJivUW97OG5J-irQrDz8iACGEah0prIN0j9wnJou1VQ
-###
-GET http://localhost:8080/private
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2dlIiwiZXhwIjoxNTY1Mjk0MTM1fQ.Wg_9-tdc6Ht43GGB-YS6MHVgbSuVA9pPjxqFx07esb21TXw9Jzj1iqWEZdIfDvR2aWqw3vMzy8F67JIqHGKcog
+{ "username":"user", "password":"password" } 
+### GUEST token発行
+POST http://localhost:8080/login
+Content-Type: application/json
 
+{ "username":"guest", "password":"password" } 
+### admin
+GET http://localhost:8080/private
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb290IiwiZXhwIjoxNTY1NDUwNzU1LCJhdXRob3JpdGllcyI6WyJBRE1JTiJdfQ.rMh0yguNLpPx3qtVpFmFM5l9-Rr4I0xXL7kR6CCsTiwhSuBJLC3b6D8smQuMDMKmQgjSee7RMSu0LC440EdC2w
+### user
+GET http://localhost:8080/private
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTY1NDUxOTA4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.O_7-SWG2vhmyNWiHO-WqWWXUvLO2VdN1Q7IKtPEv14Mc89qtS3Ujia7SW-TnkND6tJPn5d74i3_Lz0m9ouA9zw
+
+
+### アドミン
+GET http://localhost:8080/useronly
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb290IiwiZXhwIjoxNTY1NDUwNzU1LCJhdXRob3JpdGllcyI6WyJBRE1JTiJdfQ.rMh0yguNLpPx3qtVpFmFM5l9-Rr4I0xXL7kR6CCsTiwhSuBJLC3b6D8smQuMDMKmQgjSee7RMSu0LC440EdC2w
+### ユーザー
+GET http://localhost:8080/useronly
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTY1NDUxNDU4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.JsxQwF6QZnZJLvNL2cCbbtBhQehM10ZFZdrqhFRmx42Cd2os-_RmGTzcap8GM06QKEk1O0dXqB0gen1tk6IFaA
 
 ####################################################
 # User
 ####################################################
 ### 全件取得
 GET http://localhost:8080/users
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb290IiwiZXhwIjoxNTY1NDQ5NTg3LCJhdXRob3JpdGllcyI6WyJST0xFX0FETUlOIl19._kEYvOShOygakc_JdQFx6pIfMfP032fA46bVErWnhjr2tyFdGomvX8CIdhVy0VTvGMEzeQYSDK6eKJEF7wCROA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb290IiwiZXhwIjoxNTY1NDUwNzU1LCJhdXRob3JpdGllcyI6WyJBRE1JTiJdfQ.rMh0yguNLpPx3qtVpFmFM5l9-Rr4I0xXL7kR6CCsTiwhSuBJLC3b6D8smQuMDMKmQgjSee7RMSu0LC440EdC2w
 
 ### 全件取得
 GET http://localhost:8080/users
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTY1NDQ3NDc1LCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXX0.TAHVH1R9R10DbGLQq-i6oDM1-Qls8oj_i0JPe_gU41p2yvNsVez1Qb3GpIV84KpaPXdPRlC-Qj-ziHMLluY-xg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTY1NDUwNzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.oLuYbvQ7qlK38QoeBQpfnjhoyxBLJAP4Zn-fN_0ByAkPGnz3qD74eT6_8I2GYKAiWrPiiN1F_iBSprt57Quv5w
 
 ### ID指定取得
 GET http://localhost:8080/users/hoge

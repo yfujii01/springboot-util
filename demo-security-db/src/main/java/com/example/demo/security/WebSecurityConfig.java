@@ -32,10 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 // 認証無しでアクセス許可するURL
                 .antMatchers("/login", "/public").permitAll()
-                // .antMatchers("/users/**").hasAuthority("ADMIN")
-                // .antMatchers("/users/**").hasRole("ADMIN")
-                .antMatchers("/users/**").hasRole("ADMIN")
-                // .antMatchers("/teacher/**").access("hasAnyRole('ADMIN')")
+                .antMatchers("/adminonly","/users/**").hasAuthority("ADMIN")
+                .antMatchers("/useronly").hasAuthority("USER")
                 // その他のURLは全て認証を必要とさせる
                 .anyRequest().authenticated()
                 // CSRF
