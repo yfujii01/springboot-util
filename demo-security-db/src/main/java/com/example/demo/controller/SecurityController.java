@@ -24,4 +24,8 @@ public class SecurityController {
   public String userPage() throws Exception {
     return "this is user only page!";
   }
+  @GetMapping("userandadminonly")
+  public String userAndAdminPage() throws Exception {
+    return "this is user and admin only page!";
+  }
 }
