@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.FilterChain;
@@ -17,6 +18,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -46,7 +48,10 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
       System.out.println("debug : CustomAuthenticationFilter : attemptAuthentication");
 
       // リクエストボディを展開
-      RequestUser userForm = new ObjectMapper().readValue(request.getInputStream(), RequestUser.class);
+      // RequestUser userForm = new ObjectMapper().readValue(request.getInputStream(),
+      // RequestUser.class);
+      com.example.demo.entity.User userForm = new ObjectMapper().readValue(request.getInputStream(),
+          com.example.demo.entity.User.class);
 
       // リクエストされたユーザ情報を設定
       UsernamePasswordAuthenticationToken u = new UsernamePasswordAuthenticationToken(userForm.getUsername(),
@@ -75,7 +80,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     Date exp = new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME);
 
     Map<String, Object> authorities = new HashMap<>();
-    authorities.put("authorities", user.getAuthorities().stream().map(a->a.getAuthority()).toArray());
+    authorities.put("authorities", user.getAuthorities().stream().map(a -> a.getAuthority()).toArray());
 
     // token
     String token = Jwts.builder().setSubject(username).setExpiration(exp).addClaims(authorities)
