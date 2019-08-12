@@ -1,0 +1,410 @@
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+:: Spring Initializr ::  https://start.spring.io
+
+This service generates quickstart projects that can be easily customized.
+Possible customizations include a project's dependencies, Java version, and
+build system or build structure. See below for further details.
+
+The services uses a HAL based hypermedia format to expose a set of resources
+to interact with. If you access this root resource requesting application/json
+as media type the response will contain the following links:
++-----------------+-----------------------------------------+
+| Rel             | Description                             |
++-----------------+-----------------------------------------+
+| gradle-build    | Generate a Gradle build file            |
+| gradle-project  | Generate a Gradle based project archive |
+| maven-build     | Generate a Maven pom.xml                |
+| maven-project * | Generate a Maven based project archive  |
++-----------------+-----------------------------------------+
+
+
+The URI templates take a set of parameters to customize the result of a request
+to the linked resource.
++-----------------+------------------------------------------+------------------------------+
+| Parameter       | Description                              | Default value                |
++-----------------+------------------------------------------+------------------------------+
+| applicationName | application name                         | DemoApplication              |
+| artifactId      | project coordinates (infer archive name) | demo                         |
+| baseDir         | base directory to create in the archive  | no base dir                  |
+| bootVersion     | spring boot version                      | 2.1.7.RELEASE                |
+| dependencies    | dependency identifiers (comma-separated) | none                         |
+| description     | project description                      | Demo project for Spring Boot |
+| groupId         | project coordinates                      | com.example                  |
+| javaVersion     | language level                           | 1.8                          |
+| language        | programming language                     | java                         |
+| name            | project name (infer application name)    | demo                         |
+| packageName     | root package                             | com.example.demo             |
+| packaging       | project packaging                        | jar                          |
+| type            | project type                             | maven-project                |
+| version         | project version                          | 0.0.1-SNAPSHOT               |
++-----------------+------------------------------------------+------------------------------+
+
+
+The following section has a list of supported identifiers for the comma-separated
+list of "dependencies".
++--------------------------------------+--------------------------------------------------------------+-------------------------------+
+| Id                                   | Description                                                  | Required version              |
++--------------------------------------+--------------------------------------------------------------+-------------------------------+
+| activemq                             | Spring JMS support with Apache ActiveMQ 'Classic'            |                               |
+|                                      |                                                              |                               |
+| actuator                             | Supports built in (or custom) endpoints that let you monitor |                               |
+|                                      | and manage your application - such as application health,    |                               |
+|                                      | metrics, sessions, etc.                                      |                               |
+|                                      |                                                              |                               |
+| amqp                                 | Gives your applications a common platform to send and        |                               |
+|                                      | receive messages, and your messages a safe place to live     |                               |
+|                                      | until received.                                              |                               |
+|                                      |                                                              |                               |
+| artemis                              | Spring JMS support with Apache ActiveMQ Artemis              |                               |
+|                                      |                                                              |                               |
+| azure-active-directory               | Spring Security integration with Azure Active Directory for  |                               |
+|                                      | authentication.                                              |                               |
+|                                      |                                                              |                               |
+| azure-keyvault-secrets               | Manage application secrets and keys.                         |                               |
+|                                      |                                                              |                               |
+| azure-storage                        | Azure Storage service integration.                           |                               |
+|                                      |                                                              |                               |
+| azure-support                        | Auto-configuration for Azure Services (Service Bus, Storage, |                               |
+|                                      | Active Directory, Cosmos DB, Key Vault, and more).           |                               |
+|                                      |                                                              |                               |
+| batch                                | Batch applications with transactions, retry/skip and chunk   |                               |
+|                                      | based processing.                                            |                               |
+|                                      |                                                              |                               |
+| cache                                | Provides cache-related operations, such as the ability to    |                               |
+|                                      | update the content of the cache, but does not provide the    |                               |
+|                                      | actual data store.                                           |                               |
+|                                      |                                                              |                               |
+| camel                                | Apache Camel lets you create the Enterprise Integration      |                               |
+|                                      | Patterns to implement routing and mediation rules a Java     |                               |
+|                                      | based Domain Specific Language via Spring.                   |                               |
+|                                      |                                                              |                               |
+| cloud-aws                            | AWS native services from Spring Cloud for AWS                |                               |
+|                                      |                                                              |                               |
+| cloud-aws-jdbc                       | Relational databases on AWS with RDS and Spring Cloud AWS    |                               |
+|                                      | JDBC                                                         |                               |
+|                                      |                                                              |                               |
+| cloud-aws-messaging                  | Messaging on AWS with SQS and Spring Cloud AWS Messaging     |                               |
+|                                      |                                                              |                               |
+| cloud-bus                            | Links nodes of a distributed system with a lightweight       |                               |
+|                                      | message broker which can used to broadcast state changes or  |                               |
+|                                      | other management instructions (requires a binder, e.g.       |                               |
+|                                      | Apache Kafka or RabbitMQ).                                   |                               |
+|                                      |                                                              |                               |
+| cloud-cloudfoundry-discovery         | Service discovery with Cloud Foundry                         |                               |
+|                                      |                                                              |                               |
+| cloud-config-client                  | Client that connects to a Spring Cloud Config Server to      |                               |
+|                                      | fetch the application's configuration.                       |                               |
+|                                      |                                                              |                               |
+| cloud-config-server                  | Central management for configuration via Git, SVN, or        |                               |
+|                                      | HashiCorp Vault.                                             |                               |
+|                                      |                                                              |                               |
+| cloud-connectors                     | Simplifies the process of connecting to services and gaining |                               |
+|                                      | operating environment awareness in cloud platforms such as   |                               |
+|                                      | Cloud Foundry and Heroku.                                    |                               |
+|                                      |                                                              |                               |
+| cloud-contract-stub-runner           | Stub Runner for HTTP/Messaging based communication. Allows   |                               |
+|                                      | creating WireMock stubs from RestDocs tests.                 |                               |
+|                                      |                                                              |                               |
+| cloud-contract-verifier              | Moves TDD to the level of software architecture by enabling  |                               |
+|                                      | Consumer Driven Contract (CDC) development.                  |                               |
+|                                      |                                                              |                               |
+| cloud-eureka                         | a REST based service for locating services for the purpose   |                               |
+|                                      | of load balancing and failover of middle-tier servers.       |                               |
+|                                      |                                                              |                               |
+| cloud-eureka-server                  | spring-cloud-netflix Eureka Server                           |                               |
+|                                      |                                                              |                               |
+| cloud-feign                          | Declarative REST Client. OpenFeign creates a dynamic         |                               |
+|                                      | implementation of an interface decorated with JAX-RS or      |                               |
+|                                      | Spring MVC annotations.                                      |                               |
+|                                      |                                                              |                               |
+| cloud-function                       | Promotes the implementation of business logic via functions  |                               |
+|                                      | and supports a uniform programming model across serverless   |                               |
+|                                      | providers, as well as the ability to run standalone (locally |                               |
+|                                      | or in a PaaS).                                               |                               |
+|                                      |                                                              |                               |
+| cloud-gateway                        | Provides a simple, yet effective way to route to APIs and    |                               |
+|                                      | provide cross cutting concerns to them such as security,     |                               |
+|                                      | monitoring/metrics, and resiliency.                          |                               |
+|                                      |                                                              |                               |
+| cloud-gcp                            | Contains auto-configuration support for every Spring Cloud   |                               |
+|                                      | GCP integration. Most of the auto-configuration code is only |                               |
+|                                      | enabled if other dependencies are added to the classpath.    |                               |
+|                                      |                                                              |                               |
+| cloud-gcp-pubsub                     | Adds the GCP Support entry and all the required dependencies |                               |
+|                                      | so that the Google Cloud Pub/Sub integration work out of the |                               |
+|                                      | box.                                                         |                               |
+|                                      |                                                              |                               |
+| cloud-gcp-storage                    | Adds the GCP Support entry and all the required dependencies |                               |
+|                                      | so that the Google Cloud Storage integration work out of the |                               |
+|                                      | box.                                                         |                               |
+|                                      |                                                              |                               |
+| cloud-hystrix                        | Circuit breaker with Spring Cloud Netflix Hystrix.           |                               |
+|                                      |                                                              |                               |
+| cloud-hystrix-dashboard              | Circuit breaker dashboard with Spring Cloud Netflix Hystrix. |                               |
+|                                      |                                                              |                               |
+| cloud-oauth2                         | OAuth2 and distributed application patterns with             |                               |
+|                                      | spring-cloud-security.                                       |                               |
+|                                      |                                                              |                               |
+| cloud-ribbon                         | Client side load balancing with Spring Cloud Netflix and     |                               |
+|                                      | Ribbon.                                                      |                               |
+|                                      |                                                              |                               |
+| cloud-security                       | A declarative model which can be heavily configured          |                               |
+|                                      | externally (or centrally) lends itself to the implementation |                               |
+|                                      | of large systems of co-operating, remote components, usually |                               |
+|                                      | with a central indentity management service.                 |                               |
+|                                      |                                                              |                               |
+| cloud-starter                        | Non-specific Spring Cloud features, unrelated to external    |                               |
+|                                      | libraries or integrations (e.g. Bootstrap context and        |                               |
+|                                      | @RefreshScope)                                               |                               |
+|                                      |                                                              |                               |
+| cloud-starter-consul-config          | Enable and configure the common patterns inside your         |                               |
+|                                      | application and build large distributed systems with         |                               |
+|                                      | Hashicorp’s Consul. The patterns provided include Service    |                               |
+|                                      | Discovery, Distributed Configuration and Control Bus.        |                               |
+|                                      |                                                              |                               |
+| cloud-starter-consul-discovery       | Service discovery with Hashicorp Consul                      |                               |
+|                                      |                                                              |                               |
+| cloud-starter-sleuth                 | Distributed tracing via logs with Spring Cloud Sleuth.       |                               |
+|                                      |                                                              |                               |
+| cloud-starter-vault-config           | Provides client-side support for externalized configuration  |                               |
+|                                      | in a distributed system. Using HashiCorp's Vault you have a  |                               |
+|                                      | central place to manage external secret properties for       |                               |
+|                                      | applications across all environments.                        |                               |
+|                                      |                                                              |                               |
+| cloud-starter-zipkin                 | Distributed tracing with an existing Zipkin installation and |                               |
+|                                      | Spring Cloud Sleuth Zipkin.                                  |                               |
+|                                      |                                                              |                               |
+| cloud-starter-zookeeper-config       | Enable and configure common patterns inside your application |                               |
+|                                      | and build large distributed systems with Apache Zookeeper    |                               |
+|                                      | based components. The provided patterns include Service      |                               |
+|                                      | Discovery and Configuration.                                 |                               |
+|                                      |                                                              |                               |
+| cloud-starter-zookeeper-discovery    | Service discovery with Apache Zookeeper                      |                               |
+|                                      |                                                              |                               |
+| cloud-stream                         | Framework for building highly scalable event-driven          |                               |
+|                                      | microservices connected with shared messaging systems        |                               |
+|                                      | (requires a binder, e.g. Apache Kafka or RabbitMQ).          |                               |
+|                                      |                                                              |                               |
+| cloud-task                           | Allows a user to develop and run short lived microservices   |                               |
+|                                      | using Spring Cloud. Run them locally, in the cloud, and on   |                               |
+|                                      | Spring Cloud Data Flow.                                      |                               |
+|                                      |                                                              |                               |
+| cloud-turbine                        | Circuit breaker metric aggregation using                     |                               |
+|                                      | spring-cloud-netflix with Turbine and server-sent events     |                               |
+|                                      |                                                              |                               |
+| cloud-turbine-stream                 | Circuit breaker metric aggregation using                     |                               |
+|                                      | spring-cloud-netflix with Turbine and Spring Cloud Stream    |                               |
+|                                      | (requires a binder, e.g. Apache Kafka or RabbitMQ)           |                               |
+|                                      |                                                              |                               |
+| cloud-zuul                           | Intelligent and programmable routing with Spring Cloud       |                               |
+|                                      | Netflix Zuul.                                                |                               |
+|                                      |                                                              |                               |
+| codecentric-spring-boot-admin-client | Required for your application to register with a Spring Boot | >=2.0.0.RELEASE and <2.2.0.M1 |
+|                                      | Admin Server instance.                                       |                               |
+|                                      |                                                              |                               |
+| codecentric-spring-boot-admin-server | A community project to manage and monitor your Spring Boot   | >=2.0.0.RELEASE and <2.2.0.M1 |
+|                                      | applications. Provides a UI on top of the Spring Boot        |                               |
+|                                      | Actuator endpoints.                                          |                               |
+|                                      |                                                              |                               |
+| configuration-processor              | Generate metadata for developers to offer contextual help    |                               |
+|                                      | and “code completion” when working with custom configuration |                               |
+|                                      | keys (ex.application.properties/.yml files).                 |                               |
+|                                      |                                                              |                               |
+| data-cassandra                       | A free and open-source, distributed, NoSQL database          |                               |
+|                                      | management system that offers high-scalability and           |                               |
+|                                      | high-performance.                                            |                               |
+|                                      |                                                              |                               |
+| data-cassandra-reactive              | Access Cassandra NoSQL Database in a reactive fashion        |                               |
+|                                      |                                                              |                               |
+| data-couchbase                       | NoSQL document-oriented database that offers in memory-first |                               |
+|                                      | architecture, geo-distributed deployments, and workload      |                               |
+|                                      | isolation.                                                   |                               |
+|                                      |                                                              |                               |
+| data-couchbase-reactive              | Access Couchbase NoSQL database in a reactive fashion with   |                               |
+|                                      | Spring Data Couchbase.                                       |                               |
+|                                      |                                                              |                               |
+| data-elasticsearch                   | A distributed, RESTful search and analytics engine with      |                               |
+|                                      | Spring Data Elasticsearch.                                   |                               |
+|                                      |                                                              |                               |
+| data-jpa                             | Persist data in SQL stores with Java Persistence API using   |                               |
+|                                      | Spring Data and Hibernate.                                   |                               |
+|                                      |                                                              |                               |
+| data-ldap                            | Makes it easier to build Spring based applications that use  |                               |
+|                                      | the Lightweight Directory Access Protocol.                   |                               |
+|                                      |                                                              |                               |
+| data-mongodb                         | Store data in flexible, JSON-like documents, meaning fields  |                               |
+|                                      | can vary from document to document and data structure can be |                               |
+|                                      | changed over time.                                           |                               |
+|                                      |                                                              |                               |
+| data-mongodb-reactive                | Provides asynchronous stream processing with non-blocking    |                               |
+|                                      | back pressure for MongoDB. Implements the Reactive Streams   |                               |
+|                                      | API.                                                         |                               |
+|                                      |                                                              |                               |
+| data-neo4j                           | An open source NoSQL database that stores data structured as |                               |
+|                                      | graphs consisting of nodes, connected by relationships.      |                               |
+|                                      |                                                              |                               |
+| data-redis                           | Advanced and thread-safe Java Redis client for synchronous,  |                               |
+|                                      | asynchronous, and reactive usage. Supports Cluster,          |                               |
+|                                      | Sentinel, Pipelining, Auto-Reconnect, Codecs and much more.  |                               |
+|                                      |                                                              |                               |
+| data-redis-reactive                  | Access Redis key-value data stores in a reactive fashion     |                               |
+|                                      | with Spring Data Redis.                                      |                               |
+|                                      |                                                              |                               |
+| data-rest                            | Exposing Spring Data repositories over REST via Spring Data  |                               |
+|                                      | REST.                                                        |                               |
+|                                      |                                                              |                               |
+| data-rest-hal                        | Browsing Spring Data REST repositories in your browser.      |                               |
+|                                      |                                                              |                               |
+| data-solr                            | Apache Solr is an open source enterprise search platform     |                               |
+|                                      | built on Apache Lucene.                                      |                               |
+|                                      |                                                              |                               |
+| derby                                | An open source relational database implemented entirely in   |                               |
+|                                      | Java.                                                        |                               |
+|                                      |                                                              |                               |
+| devtools                             | Provides fast application restarts, LiveReload, and          |                               |
+|                                      | configurations for enhanced development experience.          |                               |
+|                                      |                                                              |                               |
+| flapdoodle-mongo                     | Provides a platform neutral way for running MongoDB in unit  |                               |
+|                                      | tests.                                                       |                               |
+|                                      |                                                              |                               |
+| flyway                               | Version control for your database so you can migrate from    |                               |
+|                                      | any version (incl. an empty database) to the latest version  |                               |
+|                                      | of the schema.                                               |                               |
+|                                      |                                                              |                               |
+| freemarker                           | Java library to generate text output (HTML web pages,        |                               |
+|                                      | e-mails, configuration files, source code, etc.) based on    |                               |
+|                                      | templates and changing data.                                 |                               |
+|                                      |                                                              |                               |
+| groovy-templates                     | Groovy templating engine                                     |                               |
+|                                      |                                                              |                               |
+| h2                                   | Provides a fast in-memory database that supports JDBC API,   |                               |
+|                                      | with a small (2mb) footprint. Supports embedded and server   |                               |
+|                                      | modes as well as a browser based console application.        |                               |
+|                                      |                                                              |                               |
+| hateoas                              | Eases the creation of RESTful APIs that follow the HATEOAS   |                               |
+|                                      | principle when working with Spring / Spring MVC.             |                               |
+|                                      |                                                              |                               |
+| hsql                                 | Lightweight 100% Java SQL Database Engine.                   |                               |
+|                                      |                                                              |                               |
+| integration                          | Adds support for Enterprise Integration Patterns. Enables    |                               |
+|                                      | lightweight messaging and supports integration with external |                               |
+|                                      | systems via declarative adapters.                            |                               |
+|                                      |                                                              |                               |
+| jdbc                                 | Database Connectivity API that defines how a client may      |                               |
+|                                      | connect and query a database.                                |                               |
+|                                      |                                                              |                               |
+| jersey                               | Framework for developing RESTful Web Services in Java that   |                               |
+|                                      | provides support for JAX-RS APIs.                            |                               |
+|                                      |                                                              |                               |
+| jooq                                 | Generate Java code from your database and build type safe    |                               |
+|                                      | SQL queries through a fluent API.                            |                               |
+|                                      |                                                              |                               |
+| kafka                                | Publish, subscribe, store, and process streams of records.   |                               |
+|                                      |                                                              |                               |
+| kafka-streams                        | Building stream processing applications with Apache Kafka    |                               |
+|                                      | Streams.                                                     |                               |
+|                                      |                                                              |                               |
+| liquibase                            | Liquibase database migration and source control library.     |                               |
+|                                      |                                                              |                               |
+| lombok                               | Java annotation library which helps to reduce boilerplate    |                               |
+|                                      | code.                                                        |                               |
+|                                      |                                                              |                               |
+| mail                                 | Send email using Java Mail and Spring Framework's            |                               |
+|                                      | JavaMailSender.                                              |                               |
+|                                      |                                                              |                               |
+| mustache                             | Logic-less Templates. There are no if statements, else       |                               |
+|                                      | clauses, or for loops. Instead there are only tags.          |                               |
+|                                      |                                                              |                               |
+| mybatis                              | Persistence framework with support for custom SQL, stored    |                               |
+|                                      | procedures and advanced mappings. MyBatis couples objects    |                               |
+|                                      | with stored procedures or SQL statements using a XML         |                               |
+|                                      | descriptor or annotations.                                   |                               |
+|                                      |                                                              |                               |
+| mysql                                | MySQL JDBC driver.                                           |                               |
+|                                      |                                                              |                               |
+| oauth2-client                        | Spring Boot integration for Spring Security's OAuth2/OpenID  |                               |
+|                                      | Connect client features.                                     |                               |
+|                                      |                                                              |                               |
+| oauth2-resource-server               | Spring Boot integration for Spring Security's OAuth2         | >=2.1.0.M2                    |
+|                                      | resource server features.                                    |                               |
+|                                      |                                                              |                               |
+| okta                                 | Okta specific configuration for Spring Security/Spring Boot  | >=2.1.2.RELEASE               |
+|                                      | OAuth2 features. Enable your Spring Boot application to work |                               |
+|                                      | with Okta via OAuth 2.0/OIDC.                                |                               |
+|                                      |                                                              |                               |
+| open-service-broker                  | Framework for building Spring Boot apps that implement the   |                               |
+|                                      | Open Service Broker API, which can deliver services to       |                               |
+|                                      | applications running within cloud native platforms such as   |                               |
+|                                      | Cloud Foundry, Kubernetes and OpenShift.                     |                               |
+|                                      |                                                              |                               |
+| postgresql                           | An open source JDBC driver that allows Java programs to      |                               |
+|                                      | connect to a PostgreSQL database using standard, database    |                               |
+|                                      | independent Java code.                                       |                               |
+|                                      |                                                              |                               |
+| quartz                               | Schedule jobs using Quartz.                                  |                               |
+|                                      |                                                              |                               |
+| reactive-cloud-stream                | Reactive messaging microservices with Spring Cloud Stream    |                               |
+|                                      | (requires a binder, e.g. Apache Kafka or RabbitMQ).          |                               |
+|                                      |                                                              |                               |
+| restdocs                             | Document RESTful services by combining hand-written with     |                               |
+|                                      | Asciidoctor and auto-generated snippets produced with Spring |                               |
+|                                      | MVC Test.                                                    |                               |
+|                                      |                                                              |                               |
+| rsocket                              | RSocket.io applications with Spring Messaging and Netty.     | >=2.2.0.M2                    |
+|                                      |                                                              |                               |
+| scs-circuit-breaker                  | Hystrix circuit breaker client on Pivotal Cloud Foundry      |                               |
+|                                      |                                                              |                               |
+| scs-config-client                    | Config client on Pivotal Cloud Foundry                       |                               |
+|                                      |                                                              |                               |
+| scs-service-registry                 | Eureka service discovery client on Pivotal Cloud Foundry     |                               |
+|                                      |                                                              |                               |
+| security                             | Highly customizable authentication and access-control        |                               |
+|                                      | framework for Spring applications.                           |                               |
+|                                      |                                                              |                               |
+| session                              | Provides an API and implementations for managing user        |                               |
+|                                      | session information.                                         |                               |
+|                                      |                                                              |                               |
+| sqlserver                            | A Type 4 JDBC driver that provides access to Microsoft SQL   |                               |
+|                                      | Server and Azure SQL Database from any Java application.     |                               |
+|                                      |                                                              |                               |
+| thymeleaf                            | A modern server-side Java template engine for both web and   |                               |
+|                                      | standalone environments. Allows HTML to be correctly         |                               |
+|                                      | displayed in browsers and as static prototypes.              |                               |
+|                                      |                                                              |                               |
+| vaadin                               | Java framework for building rich client apps based on Web    |                               |
+|                                      | components.                                                  |                               |
+|                                      |                                                              |                               |
+| web                                  | Build web, including RESTful, applications using Spring MVC. |                               |
+|                                      | Uses Apache Tomcat as the default embedded container.        |                               |
+|                                      |                                                              |                               |
+| web-services                         | Facilitates contract-first SOAP development. Allows for the  |                               |
+|                                      | creation of flexible web services using one of the many ways |                               |
+|                                      | to manipulate XML payloads.                                  |                               |
+|                                      |                                                              |                               |
+| webflux                              | Build reactive web applications with Spring WebFlux and      |                               |
+|                                      | Netty.                                                       |                               |
+|                                      |                                                              |                               |
+| websocket                            | Build WebSocket applications with SockJS and STOMP.          |                               |
++--------------------------------------+--------------------------------------------------------------+-------------------------------+
+
+Examples:
+
+To create a default demo.zip:
+	$ curl https://start.spring.io/starter.zip -o demo.zip
+
+To create a web project using Java 11:
+	$ curl https://start.spring.io/starter.zip -d dependencies=web \\
+			-d javaVersion=11 -o demo.zip
+
+To create a web/data-jpa gradle project unpacked:
+	$ curl https://start.spring.io/starter.tgz -d dependencies=web,data-jpa \\
+		   -d type=gradle-project -d baseDir=my-dir | tar -xzvf -
+
+To generate a Maven POM with war packaging:
+	$ curl https://start.spring.io/pom.xml -d packaging=war -o pom.xml
+

@@ -6,15 +6,20 @@ SpringBootで新しいプロジェクトを作るときのサポート用
 
 新規プロジェクトはSpring Initializrで作成する。
 
-公式サイト
+* 公式サイト
 
 https://start.spring.io/
 
-vscode拡張
+* vscode拡張
 
 https://github.com/microsoft/vscode-spring-initializr
 
-### 登録する依存関係
+* curlを使う方法
+
+[リンク](curl-sample/readme.md)
+
+
+### よく登録する依存関係
 
 * Spring Boot DevTools
 * Lombok
