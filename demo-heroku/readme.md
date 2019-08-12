@@ -69,3 +69,20 @@ $ heroku create
 # デプロイ
 $ git push heroku master
 ```
+
+### プロジェクト削除
+
+heroku destroyコマンドを実行することで確認メッセージが表示される
+
+それでアプリケーション名を入力することでコマンドライン上で削除が可能になる
+
+```sh
+$ heroku destroy
+ !    WARNING: This will delete ⬢ damp-taiga-83274
+ !    including all add-ons.
+ !    To proceed, type damp-taiga-83274 or re-run this
+ !    command with --confirm damp-taiga-83274
+
+> damp-taiga-83274
+Destroying ⬢ damp-taiga-83274 (including all add-ons)... done
+```
