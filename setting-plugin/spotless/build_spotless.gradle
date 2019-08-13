@@ -1,0 +1,40 @@
+// [使い方]
+//
+// このファイルを./gradle/に配置する
+// ./gradle/build_spotless.gradle
+//
+// build.gradleの先頭に以下を追加すること
+// plugins { id "com.diffplug.gradle.spotless" version "3.22.0" }
+//
+// build.gradleの最後尾に以下を追加する
+// apply from: 'gradle/build_spotless.gradle'
+
+spotless {
+	java {
+		googleJavaFormat()
+		indentWithTabs(2)
+		indentWithSpaces(4)
+	}
+	format 'misc', {
+		target '**/*.gradle', '**/*.md', '**/.gitignore'
+		targetExclude 'src/main/codegen/**', 'src/test/codegen/**'
+		trimTrailingWhitespace()
+		indentWithTabs()
+		// indentWithSpaces(4)
+		endWithNewline()
+	}
+}
+
+// compileJava実行前にコードフォーマットを実行する
+compileJava.dependsOn 'spotlessApply'
+
+// test実行前にコードフォーマットを実行する
+test.dependsOn 'spotlessApply'
+
+// format実行
+task format {
+	doLast {
+		println 'format!'
+	}
+}
+format.dependsOn 'spotlessApply'

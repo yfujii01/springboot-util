@@ -1,0 +1,20 @@
+// [使い方]
+//
+// このファイルを./gradle/に配置する
+// ./gradle/build_flyway.gradle
+//
+// build.gradleの先頭に以下を追加する
+// plugins { id "org.flywaydb.flyway" version "5.2.4" }
+//
+// build.gradleの最後尾に以下を追加する
+// apply from: 'gradle/build_flyway.gradle'
+
+dependencies {
+	compile 'mysql:mysql-connector-java'
+}
+
+flyway {
+	url = System.getenv("SPRING_DATASOURCE_URL")
+	user = System.getenv("SPRING_DATASOURCE_USERNAME")
+	password = System.getenv("SPRING_DATASOURCE_PASSWORD")
+}
