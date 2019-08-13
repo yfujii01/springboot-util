@@ -1,6 +1,6 @@
 [HOMEへ](../readme.md)
 
-# curlを使ってSpringInitilyzrを使う方法
+# curlを使ってSpringInitialyzrを使う方法
 
 ## サンプル
 ```
