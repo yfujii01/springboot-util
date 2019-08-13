@@ -1,0 +1,19 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.test.defaultConfig": "test",
+  "java.test.config": [
+    {
+      "name": "test",
+      "workingDirectory": "${workspaceFolder}",
+      "env": {
+        "spring.config.location": "src/test/resources/application.properties"
+      }
+    },
+    {
+      "name": "use-profile-test",
+      "workingDirectory": "${workspaceFolder}",
+      "args": ["--spring.profiles.active=test"],
+      "vmargs": ["-Dspring.profiles.active=test"]
+    }
+  ]
+}
