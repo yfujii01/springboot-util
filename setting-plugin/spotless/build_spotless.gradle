@@ -12,8 +12,8 @@
 spotless {
 	java {
 		googleJavaFormat()
-		indentWithTabs(2)
-		indentWithSpaces(4)
+		// indentWithTabs(2)
+		// indentWithSpaces(4)
 	}
 	format 'misc', {
 		target '**/*.gradle', '**/*.md', '**/.gitignore'
