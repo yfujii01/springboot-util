@@ -1,0 +1,21 @@
+// [使い方]
+//
+// このファイルを./gradle/に配置する
+// ./gradle/build_jacoco.gradle
+//
+// build.gradleの先頭に以下を追加すること
+// plugins { id "jacoco" }
+//
+// build.gradleの最後尾に以下を追加する
+// apply from: 'gradle/build_jacoco.gradle'
+
+jacocoTestReport {
+	afterEvaluate {
+		classDirectories = files(classDirectories.files.collect {
+			fileTree(
+				dir: it,
+				exclude: '**/Application**'
+			)
+		})
+	}
+}
