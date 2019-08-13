@@ -51,8 +51,7 @@ public class BookControllerTests extends AbstractControllerTests {
                 (MockMvcRequestBuilders //
                     .get("/books") // url
                     .header(SecurityConstants.HEADER_STRING, token) // header
-                )
-                )
+                ))
             // 返却されるhttp status code
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andReturn();
