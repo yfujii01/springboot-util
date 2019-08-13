@@ -1,0 +1,12 @@
+// [使い方]
+//
+// このファイルを./gradle/に配置する
+// ./gradle/build_security.gradle
+//
+// build.gradleの最後尾に以下を追加する
+// apply from: 'gradle/build_security.gradle'
+
+dependencies {
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+}
