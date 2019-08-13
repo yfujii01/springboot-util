@@ -1,0 +1,32 @@
+// build.gradleのpluginsに以下を追加すること
+// id "com.diffplug.gradle.spotless" version "3.22.0"
+
+spotless {
+	java {
+		googleJavaFormat()
+		indentWithTabs(2)
+		indentWithSpaces(4)
+	}
+	format 'misc', {
+		target '**/*.gradle', '**/*.md', '**/.gitignore'
+		targetExclude 'src/main/codegen/**', 'src/test/codegen/**'
+		trimTrailingWhitespace()
+		indentWithTabs()
+		// indentWithSpaces(4)
+		endWithNewline()
+	}
+}
+
+// compileJava実行前にコードフォーマットを実行する
+compileJava.dependsOn 'spotlessApply'
+
+// test実行前にコードフォーマットを実行する
+test.dependsOn 'spotlessApply'
+
+// format実行
+task format {
+	doLast {
+		println 'format!'
+	}
+}
+format.dependsOn 'spotlessApply'

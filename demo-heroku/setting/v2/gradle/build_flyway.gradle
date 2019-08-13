@@ -1,0 +1,12 @@
+// build.gradleのpluginsに以下を追加すること
+// id "org.flywaydb.flyway" version "5.2.4"
+
+dependencies {
+								compile 'mysql:mysql-connector-java'
+}
+
+flyway {
+								url = System.getenv("SPRING_DATASOURCE_URL")
+								user = System.getenv("SPRING_DATASOURCE_USERNAME")
+								password = System.getenv("SPRING_DATASOURCE_PASSWORD")
+}
