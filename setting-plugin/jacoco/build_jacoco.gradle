@@ -8,6 +8,9 @@
 //
 // build.gradleの最後尾に以下を追加する
 // apply from: 'gradle/build_jacoco.gradle'
+//
+// gradle test実行後に以下にレポートが出力される
+// build/reports/jacoco/test/html/index.html
 
 jacocoTestReport {
 	afterEvaluate {
@@ -19,3 +22,6 @@ jacocoTestReport {
 		})
 	}
 }
+
+// テスト実行後にカバレッジレポートを出力する
+test.finalizedBy 'jacocoTestReport'

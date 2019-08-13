@@ -1,0 +1,10 @@
+*.vcproj      text eol=crlf
+*.bat         text eol=crlf
+*.sh          text eol=lf
+*.bash        text eol=lf
+*.java        text eol=lf
+*.gradle      text eol=lf
+*.sql         text eol=lf
+*.yml         text eol=lf
+*.properties  text eol=lf
+*.md          text eol=lf

@@ -1,0 +1,49 @@
+# Java Gradle CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+
+    working_directory: ~/repo
+
+    environment:
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
+
+      - run: gradle dependencies
+
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      # コードフォーマットチェック
+      - run:
+          name: check code format
+          command: gradle spotlessCheck
+
+      # テスト実施
+      - run: gradle test
+
+      - run:
+          name: アーティファクトの作成
+          command: |
+            mkdir /tmp/artifacts;
+            cp -r ./build/reports /tmp/artifacts/reports
+          when: always
+
+      # アーティファクト公開
+      - store_artifacts:
+          path: /tmp/artifacts
