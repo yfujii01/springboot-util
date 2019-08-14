@@ -1,14 +1,12 @@
 package com.example.demo.repository;
 
+import com.example.demo.entity.Authority;
+import com.example.demo.entity.User;
+import com.example.demo.exception.NoDataException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import com.example.demo.entity.User;
-import com.example.demo.entity.Authority;
-import com.example.demo.exception.NoDataException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -19,11 +17,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepository {
 
-  @Autowired
-  NamedParameterJdbcTemplate jdbcTemplateName;
+  @Autowired NamedParameterJdbcTemplate jdbcTemplateName;
 
-  @Autowired
-  JdbcTemplate jdbcTemplate;
+  @Autowired JdbcTemplate jdbcTemplate;
 
   /** 全件検索 */
   public List<User> findAll() {
@@ -50,9 +46,10 @@ public class UserRepository {
   /** ID指定で検索 */
   public User findById(User user) throws NoDataException {
     // パラメータ設定
-    final SqlParameterSource params = new MapSqlParameterSource()
-        // username
-        .addValue("username", user.getUsername());
+    final SqlParameterSource params =
+        new MapSqlParameterSource()
+            // username
+            .addValue("username", user.getUsername());
 
     // SQL
     final StringBuilder sql = new StringBuilder();
@@ -79,13 +76,14 @@ public class UserRepository {
   /** 登録 */
   public void insert(User user) {
     // パラメータ設定
-    SqlParameterSource params = new MapSqlParameterSource()
-        // username
-        .addValue("username", user.getUsername())
-        // password
-        .addValue("password", user.getPassword())
-        // 有効状態
-        .addValue("enabled", user.getEnabled());
+    SqlParameterSource params =
+        new MapSqlParameterSource()
+            // username
+            .addValue("username", user.getUsername())
+            // password
+            .addValue("password", user.getPassword())
+            // 有効状態
+            .addValue("enabled", user.getEnabled());
 
     // SQL
     final StringBuilder sql = new StringBuilder();
@@ -101,37 +99,41 @@ public class UserRepository {
 
   /** authorty登録 */
   private void insertAuthority(User user) {
-    user.getAuthorities().forEach(authorty -> {
-      // パラメータ設定
-      SqlParameterSource params = new MapSqlParameterSource()
-          // username
-          .addValue("username", user.getUsername())
-          // 権限
-          .addValue("authority", authorty.getAuthority());
+    user.getAuthorities()
+        .forEach(
+            authorty -> {
+              // パラメータ設定
+              SqlParameterSource params =
+                  new MapSqlParameterSource()
+                      // username
+                      .addValue("username", user.getUsername())
+                      // 権限
+                      .addValue("authority", authorty.getAuthority());
 
-      // SQL
-      final StringBuilder sql = new StringBuilder();
-      sql.append(" insert into authorities set");
-      sql.append("   username = :username,");
-      sql.append("   authority = :authority");
-      jdbcTemplateName.update(sql.toString(), params);
-    });
+              // SQL
+              final StringBuilder sql = new StringBuilder();
+              sql.append(" insert into authorities set");
+              sql.append("   username = :username,");
+              sql.append("   authority = :authority");
+              jdbcTemplateName.update(sql.toString(), params);
+            });
   }
 
   /**
    * 修正
-   * 
+   *
    * @throws NoDataException
    */
   public User update(User user) throws NoDataException {
     // パラメータ設定
-    SqlParameterSource params = new MapSqlParameterSource()
-        // username
-        .addValue("username", user.getUsername())
-        // password
-        .addValue("password", user.getPassword())
-        // 有効状態
-        .addValue("enabled", user.getEnabled());
+    SqlParameterSource params =
+        new MapSqlParameterSource()
+            // username
+            .addValue("username", user.getUsername())
+            // password
+            .addValue("password", user.getPassword())
+            // 有効状態
+            .addValue("enabled", user.getEnabled());
 
     // SQL発行
     final StringBuilder sql = new StringBuilder();
@@ -149,9 +151,10 @@ public class UserRepository {
   /** 削除 */
   public void delete(User user) {
     // パラメータ設定
-    final SqlParameterSource params = new MapSqlParameterSource()
-        // username
-        .addValue("username", user.getUsername());
+    final SqlParameterSource params =
+        new MapSqlParameterSource()
+            // username
+            .addValue("username", user.getUsername());
 
     // SQL
     final StringBuilder sql = new StringBuilder();
@@ -165,47 +168,56 @@ public class UserRepository {
 
   private List<User> execute(final SqlParameterSource params, final StringBuilder sql) {
     final Map<String, User> userMap = new TreeMap<>();
-    jdbcTemplateName.queryForList(sql.toString(), params).forEach(res -> {
-      final String key = (String) res.get("username");
+    jdbcTemplateName
+        .queryForList(sql.toString(), params)
+        .forEach(
+            res -> {
+              final String key = (String) res.get("username");
 
-      if (!userMap.containsKey(key)) {
-        // 新規
+              if (!userMap.containsKey(key)) {
+                // 新規
 
-        final User value = new User();
-        userMap.put(key, value);
-        value.setUsername((String) res.get("username"));
-        value.setPassword((String) res.get("password"));
-        value.setEnabled((Boolean) res.get("enabled"));
+                final User value = new User();
+                userMap.put(key, value);
+                value.setUsername((String) res.get("username"));
+                value.setPassword((String) res.get("password"));
+                value.setEnabled((Boolean) res.get("enabled"));
 
-        // 著者情報
-        if (res.get("authority_username") != null) {
-          value.setAuthorities(new ArrayList<Authority>() {
-            private static final long serialVersionUID = 1L;
-            {
-              add(new Authority() {
-                {
-                  setUsername((String) res.get("authority_username"));
-                  setAuthority((String) res.get("authority"));
+                // 著者情報
+                if (res.get("authority_username") != null) {
+                  value.setAuthorities(
+                      new ArrayList<Authority>() {
+                        private static final long serialVersionUID = 1L;
+
+                        {
+                          add(
+                              new Authority() {
+                                {
+                                  setUsername((String) res.get("authority_username"));
+                                  setAuthority((String) res.get("authority"));
+                                }
+                              });
+                        }
+                      });
                 }
-              });
-            }
-          });
-        }
-      } else {
-        // 関連データ追加
+              } else {
+                // 関連データ追加
 
-        final User value = userMap.get(key);
-        // 著者情報(2件目以降)
-        if (res.get("authority_username") != null) {
-          value.getAuthorities().add(new Authority() {
-            {
-              setUsername((String) res.get("authority_username"));
-              setAuthority((String) res.get("authority"));
-            }
-          });
-        }
-      }
-    });
+                final User value = userMap.get(key);
+                // 著者情報(2件目以降)
+                if (res.get("authority_username") != null) {
+                  value
+                      .getAuthorities()
+                      .add(
+                          new Authority() {
+                            {
+                              setUsername((String) res.get("authority_username"));
+                              setAuthority((String) res.get("authority"));
+                            }
+                          });
+                }
+              }
+            });
     return new ArrayList<>(userMap.values());
   }
 }

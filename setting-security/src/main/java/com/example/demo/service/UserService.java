@@ -3,7 +3,6 @@ package com.example.demo.service;
 import com.example.demo.entity.User;
 import com.example.demo.exception.NoDataException;
 import com.example.demo.repository.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,7 +24,7 @@ public class UserService {
   /** パスワードエンコーダー */
   @Autowired PasswordEncoder passwordEncoder;
 
-  public User findByUsername(User user) throws NoDataException{
+  public User findByUsername(User user) throws NoDataException {
     return userRepository.findById(user);
   }
 

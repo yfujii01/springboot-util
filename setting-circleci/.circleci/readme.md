@@ -22,20 +22,20 @@ GitHubとの連携が簡単で無料で使用できる
 
 3. circle ciにログインする
 
-  https://circleci.com/
+https://circleci.com/
 
-  Log In with GitHub でOK
+Log In with GitHub でOK
 
 4. Add PROJECTS
 
 5. Set Up Project
 
-  初期設定でOK
+初期設定でOK
 
-  * Operating System
-    Linux
-  * Language
-    Gradle(Java)
+* Operating System
+	Linux
+* Language
+	Gradle(Java)
 
 6. Start building
 
@@ -57,15 +57,15 @@ GitHubとの連携が簡単で無料で使用できる
 
 1. Create Token
 
-  * First choose a scope and then create a label.
-    Status
-  
-  * Token Label
-    Demo Project Circle Ci Status Badge
+* First choose a scope and then create a label.
+	Status
+
+* Token Label
+	Demo Project Circle Ci Status Badge
 
 1. NOTIFICATIONS > Status Badges
 
 1. API Token
-  先程作成したTokenを選択する
+先程作成したTokenを選択する
 
 1. Embed Code に書かれているコードをプロジェクトのreadme.mdの先頭に記載する
