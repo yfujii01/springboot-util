@@ -1,13 +1,11 @@
 package com.example.demo.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -21,14 +19,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.Data;
-
 @RestController
 @RequestMapping("/hoge")
 public class HogeController {
 
-  @Autowired
-  NamedParameterJdbcTemplate jdbcTemplateName;
+  @Autowired NamedParameterJdbcTemplate jdbcTemplateName;
 
   ObjectMapper objectMapper = new ObjectMapper();
 
@@ -40,14 +35,17 @@ public class HogeController {
 
   @GetMapping()
   public String select() throws Exception {
-    List<HogeModel> hoges = jdbcTemplateName.query("select * from hoge", new RowMapper<HogeModel>() {
-      public HogeModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-        HogeModel hoge = new HogeModel();
-        hoge.setId(rs.getInt("id"));
-        hoge.setName(rs.getString("name"));
-        return hoge;
-      }
-    });
+    List<HogeModel> hoges =
+        jdbcTemplateName.query(
+            "select * from hoge",
+            new RowMapper<HogeModel>() {
+              public HogeModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                HogeModel hoge = new HogeModel();
+                hoge.setId(rs.getInt("id"));
+                hoge.setName(rs.getString("name"));
+                return hoge;
+              }
+            });
 
     // JSONに変換して返却
     return objectMapper.writeValueAsString(hoges);
@@ -56,15 +54,18 @@ public class HogeController {
   @GetMapping("{id}")
   public String selectById(@PathVariable("id") String id) throws Exception {
     SqlParameterSource params = new MapSqlParameterSource().addValue("id", id);
-    List<HogeModel> hoges = jdbcTemplateName.query("select * from hoge where id = :id", params,
-        new RowMapper<HogeModel>() {
-          public HogeModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-            HogeModel hoge = new HogeModel();
-            hoge.setId(rs.getInt("id"));
-            hoge.setName(rs.getString("name"));
-            return hoge;
-          }
-        });
+    List<HogeModel> hoges =
+        jdbcTemplateName.query(
+            "select * from hoge where id = :id",
+            params,
+            new RowMapper<HogeModel>() {
+              public HogeModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                HogeModel hoge = new HogeModel();
+                hoge.setId(rs.getInt("id"));
+                hoge.setName(rs.getString("name"));
+                return hoge;
+              }
+            });
 
     // JSONに変換して返却
     return objectMapper.writeValueAsString(hoges);
@@ -78,9 +79,10 @@ public class HogeController {
   }
 
   @PutMapping("{id}")
-  public void update(@PathVariable("id") int id,HttpServletRequest request) throws Exception {
+  public void update(@PathVariable("id") int id, HttpServletRequest request) throws Exception {
     HogeModel hoge = objectMapper.readValue(request.getInputStream(), HogeModel.class);
-    SqlParameterSource params = new MapSqlParameterSource().addValue("name", hoge.name).addValue("id", id);
+    SqlParameterSource params =
+        new MapSqlParameterSource().addValue("name", hoge.name).addValue("id", id);
     jdbcTemplateName.update("UPDATE HOGE SET name = :name WHERE id = :id", params);
   }
 

@@ -9,5 +9,4 @@ public class NoDataException extends SQLException {
   public NoDataException(String arg0) {
     super(arg0);
   }
-
 }
