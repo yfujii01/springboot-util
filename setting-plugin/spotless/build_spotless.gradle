@@ -15,14 +15,14 @@ spotless {
 		// indentWithTabs(2)
 		// indentWithSpaces(4)
 	}
-	format 'misc', {
-		target '**/*.gradle', '**/*.md', '**/.gitignore'
-		targetExclude 'src/main/codegen/**', 'src/test/codegen/**'
-		trimTrailingWhitespace()
-		indentWithTabs()
-		// indentWithSpaces(4)
-		endWithNewline()
-	}
+	// format 'misc', {
+	// 	target '**/*.gradle', '**/*.md', '**/.gitignore'
+	// 	targetExclude 'src/main/codegen/**', 'src/test/codegen/**'
+	// 	trimTrailingWhitespace()
+	// 	indentWithTabs()
+	// 	// indentWithSpaces(4)
+	// 	endWithNewline()
+	// }
 }
 
 // compileJava実行前にコードフォーマットを実行する
